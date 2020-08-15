@@ -79,7 +79,6 @@ C:\Users\jyue\source\repos\CRUDExample\CRUDExample\bin\zh-Hant\System.Web.Razor.
 C:\Users\jyue\source\repos\CRUDExample\CRUDExample\bin\zh-Hant\System.Web.WebPages.resources.dll
 C:\Users\jyue\source\repos\CRUDExample\CRUDExample\bin\zh-Hant\System.Web.WebPages.Deployment.resources.dll
 C:\Users\jyue\source\repos\CRUDExample\CRUDExample\bin\zh-Hant\System.Web.WebPages.Razor.resources.dll
-C:\Users\jyue\source\repos\CRUDExample\CRUDExample\obj\Debug\CRUDExample.csprojAssemblyReference.cache
 C:\Users\jyue\source\repos\CRUDExample\CRUDExample\obj\Debug\CRUDExample.csproj.CoreCompileInputs.cache
 C:\Users\jyue\source\repos\CRUDExample\CRUDExample\obj\Debug\CRUDExample.csproj.CopyComplete
 C:\Users\jyue\source\repos\CRUDExample\CRUDExample\obj\Debug\CRUDExample.dll
