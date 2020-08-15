@@ -84,3 +84,8 @@ C:\Users\jyue\source\repos\CRUDExample\CRUDExample\obj\Debug\CRUDExample.csproj.
 C:\Users\jyue\source\repos\CRUDExample\CRUDExample\obj\Debug\CRUDExample.csproj.CopyComplete
 C:\Users\jyue\source\repos\CRUDExample\CRUDExample\obj\Debug\CRUDExample.dll
 C:\Users\jyue\source\repos\CRUDExample\CRUDExample\obj\Debug\CRUDExample.pdb
+C:\Users\jyue\source\repos\CRUDExample\CRUDExample\bin\NLog.config
+C:\Users\jyue\source\repos\CRUDExample\CRUDExample\bin\Dapper.dll
+C:\Users\jyue\source\repos\CRUDExample\CRUDExample\bin\NLog.dll
+C:\Users\jyue\source\repos\CRUDExample\CRUDExample\bin\Dapper.xml
+C:\Users\jyue\source\repos\CRUDExample\CRUDExample\bin\NLog.xml

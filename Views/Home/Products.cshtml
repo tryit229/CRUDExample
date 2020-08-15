@@ -1,0 +1,26 @@
+﻿
+@model  List<CRUDExample.Models.ProductsModel>
+
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Products</h2>
+
+<table border="1">
+    <tr><th>產品</th><th>價格</th></tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            
+        </tr>
+    }
+</table>
