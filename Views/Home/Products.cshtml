@@ -7,7 +7,18 @@
 }
 
 <h2>Products</h2>
+<h3>新增商品</h3>
+@using (@Html.BeginForm("InsertProduct", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    <p>項目</p>
 
+    <input type="text" name="ProductName" />
+    <p>價格</p>
+    <input type="number" name="UnitPrice" />
+    <input type="submit" value="上架" class="btn btn-default" />
+
+}
+<h3>商品瀏覽</h3>
 <table border="1">
     <tr><th>產品</th><th>價格</th></tr>
     @foreach (var item in Model)
@@ -20,7 +31,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.UnitPrice)
             </td>
-            
+
         </tr>
     }
 </table>

@@ -1,4 +1,5 @@
-﻿using CRUDExample.Repository;
+﻿using CRUDExample.Models;
+using CRUDExample.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,15 @@ namespace CRUDExample.Controllers
             _northwindRepository = new NorthwindRepository();
             var list = await _northwindRepository.GetProductList();
             return View(list);
+        }
+
+        [HttpPost]
+        public async System.Threading.Tasks.Task<ActionResult> InsertProduct(ProductsModel Product)
+        {
+            _northwindRepository = new NorthwindRepository();
+            var flag = await _northwindRepository.InsertProduct(Product);
+            return RedirectToAction("Products", "Home");
+
         }
     }
 }

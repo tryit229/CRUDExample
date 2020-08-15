@@ -41,12 +41,43 @@ namespace CRUDExample.Repository
                           ,[UnitsOnOrder]
                           ,[ReorderLevel]
                           ,[Discontinued]
-                      FROM [Northwind].[dbo].[Products]"
+                      FROM [Northwind].[dbo].[Products]
+                      ORDER BY [ProductID] DESC  "
                      ).ConfigureAwait(continueOnCapturedContext: false);
 
                 return result.ToList();
             }
         }
 
+        public async Task<bool> InsertProduct(ProductsModel Products)
+        {
+            try
+            {
+                using (var cn = GetOpenConnection())
+                {
+                    var result = await cn.ExecuteAsync(
+                        @"INSERT INTO [Northwind].[dbo].[Products]
+                          ( [ProductName]
+                              ,[SupplierID]
+                              ,[CategoryID]
+                              ,[QuantityPerUnit]
+                              ,[UnitPrice]
+                              ,[UnitsInStock]
+                              ,[UnitsOnOrder]
+                              ,[ReorderLevel]
+                              ,[Discontinued])
+                          VALUES(@Name,1,1,99,@Price,99,99,99,99)",
+                          //請原諒我偷懶不想用那麼多欄位作範例XD
+                        new { Name = Products.ProductName, Price = Products.UnitPrice }
+                        );
+                    return result > 0;
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.Error($"InsertProduct:{e.Message}");
+            }
+            return false;
+        }
     }
 }
