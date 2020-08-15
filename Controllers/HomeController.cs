@@ -44,8 +44,17 @@ namespace CRUDExample.Controllers
         {
             _northwindRepository = new NorthwindRepository();
             var flag = await _northwindRepository.InsertProduct(Product);
+            //可考慮回傳訊息:新增成功、失敗，原因。
             return RedirectToAction("Products", "Home");
 
+        }
+
+        [HttpPost]
+        public async System.Threading.Tasks.Task<ActionResult> EditPrice(ProductsModel Product)
+        {
+            _northwindRepository = new NorthwindRepository();
+            var flag = await _northwindRepository.UpdatePrice(Product.ProductID, Product.UnitPrice);
+            return RedirectToAction("Products", "Home");
         }
     }
 }

@@ -79,5 +79,31 @@ namespace CRUDExample.Repository
             }
             return false;
         }
+
+        public async Task<bool> UpdatePrice(int ProductID, decimal Price)
+        {
+            try
+            {
+                using (var cn = GetOpenConnection())
+                {
+                    var check = await cn.QueryAsync<string>(
+                        @"SELECT [UnitPrice] FROM [Products] WHERE [ProductID] = @PID",
+                        new { PID = ProductID }
+                        );
+                    if (check.ToList().Count != 1) return false;
+                    var result = await cn.ExecuteAsync(
+                        @"UPDATE [Northwind].[dbo].[Products] SET [UnitPrice]=@Price WHERE [ProductID] = @PID",
+                        new { PID = ProductID, Price = Price }
+                         ).ConfigureAwait(continueOnCapturedContext: false);
+
+                    return result > 0;
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.Error($"UpdatePrice:{e.Message}");
+            }
+            return false;
+        }
     }
 }
