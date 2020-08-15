@@ -25,7 +25,19 @@ namespace CRUDExample.Controllers
         {
             _northwindRepository = new NorthwindRepository();
             var flag = await _northwindRepository.InsertProduct(Product);
+            //使用多執行緒的原因：一個動作可同時做多件事，但這個範例沒有做。
             //可考慮回傳訊息:新增成功、失敗，原因。
+            /* 正規的設計下，會制定標準化的回傳格式。讓接收端，了解該真實狀態。
+             * 例如:
+             *     public class Response<TData>
+                    {
+                        public StatusCode Code { get; set; }
+                        public string Message { get; set; }
+                        public TData Data { get; set; }
+                        public string ErrorID { get; set; }
+                        public List<string> ErrorData { get; set; }
+                    }
+             */
             return RedirectToAction("Products", "Home");
 
         }

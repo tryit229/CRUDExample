@@ -76,6 +76,7 @@ namespace CRUDExample.Repository
             catch (Exception e)
             {
                 _logger.Error($"InsertProduct:{e.Message}");
+                //TODO Handle Error
             }
             return false;
         }
@@ -102,6 +103,7 @@ namespace CRUDExample.Repository
             catch (Exception e)
             {
                 _logger.Error($"UpdatePrice:{e.Message}");
+                //TODO Handle Error
             }
             return false;
         }
@@ -148,6 +150,7 @@ namespace CRUDExample.Repository
             catch (Exception e)
             {
                 _logger.Error($"OffShelf:{e.Message}");
+                //TODO Handle Error
             }
             return false;
         }
