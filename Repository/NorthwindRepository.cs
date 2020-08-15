@@ -105,5 +105,51 @@ namespace CRUDExample.Repository
             }
             return false;
         }
+
+        public async Task<bool> OffShelf(int ProductID)
+        {
+            try
+            {
+                /* 
+                    我不喜歡"真正的"刪除任何資料，以避免日後無法追溯問題，刪除的方式有幾種
+                    1. 多一個欄位"IsDelete"來判斷資料是否存在
+                    2. 將刪掉的資料搬到另外一張表作紀錄 (我偏好這種，因為可以加速主表的搜尋速度)
+                    
+                    [Products_Delete] 這張表我除了原先的[Northwind].[dbo].[Products]欄位之外，也加入CreateTime並預設getdate()，資料被異動及搬移的時間都是重要的紀錄
+                  
+                 */
+                using (var cn = GetOpenConnection())
+                {
+                    var check = await cn.ExecuteAsync(
+                        @"	INSERT INTO [Products_Delete](
+	                                [ProductID]
+                                  ,[ProductName]
+                                  ,[SupplierID]
+                                  ,[CategoryID]
+                                  ,[QuantityPerUnit]
+                                  ,[UnitPrice]
+                                  ,[UnitsInStock]
+                                  ,[UnitsOnOrder]
+                                  ,[ReorderLevel]
+                                  ,[Discontinued])  
+	                            SELECT * FROM [Products] WHERE [ProductID] = @PID",
+                        new { PID = ProductID }
+                        );
+                    if (check == 0) return false;
+                    var result = await cn.ExecuteAsync(
+                        @"  
+	                        DELETE [Products] WHERE [ProductID] = @PID",
+                        new { PID = ProductID }
+                         ).ConfigureAwait(continueOnCapturedContext: false);
+
+                    return result > 0;
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.Error($"OffShelf:{e.Message}");
+            }
+            return false;
+        }
     }
 }

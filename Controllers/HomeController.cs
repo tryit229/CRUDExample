@@ -13,25 +13,6 @@ namespace CRUDExample.Controllers
 
         private NorthwindRepository _northwindRepository;
 
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
         public async System.Threading.Tasks.Task<ActionResult> Products()
         {
             _northwindRepository = new NorthwindRepository();
@@ -54,7 +35,18 @@ namespace CRUDExample.Controllers
         {
             _northwindRepository = new NorthwindRepository();
             var flag = await _northwindRepository.UpdatePrice(Product.ProductID, Product.UnitPrice);
+            //可考慮回傳訊息:新增成功、失敗，原因。
             return RedirectToAction("Products", "Home");
+        }
+
+        [HttpPost]
+        public async System.Threading.Tasks.Task<ActionResult> OffShelf(int ProductID)
+        {
+            _northwindRepository = new NorthwindRepository();
+            var flag = await _northwindRepository.OffShelf(ProductID);
+            //可考慮回傳訊息:新增成功、失敗，原因。
+            return RedirectToAction("Products", "Home");
+
         }
     }
 }
